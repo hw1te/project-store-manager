@@ -1,14 +1,14 @@
-const productModel = require('../models/products');
+const productsModel = require('../models/products');
 
-const productService = {
+const productsService = {
   getAll: async () => {
-    const data = await productModel.getAll();
+    const data = await productsModel.getAll();
 
     return data;
   },
 
   getById: async (id) => {
-    const data = await productModel.getById(id);
+    const data = await productsModel.getById(id);
     if (!data) {
       return { code: 404, data: { message: 'Product not found' } };
     }
@@ -17,4 +17,4 @@ const productService = {
   },
 };
 
-module.exports = productService; 
+module.exports = productsService;
