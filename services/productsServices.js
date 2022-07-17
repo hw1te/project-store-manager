@@ -15,6 +15,12 @@ const productsService = {
 
     return { code: 200, data };
   },
+
+  create: async (name) => {
+    const id = await productsModel.create(name);
+
+    return { id, name };
+  },
 };
 
 module.exports = productsService;
