@@ -13,7 +13,9 @@ const productsController = {
   },
 
   create: async (req, res) => {
-    const result = await productsService.create(req.body.name);
+    const { name } = req.body;
+
+    const result = await productsService.create(name);
     return res.status(201).json(result);
   },
 };

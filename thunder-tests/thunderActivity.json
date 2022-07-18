@@ -37,12 +37,17 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/",
+    "url": "http://localhost:3000/products",
     "method": "POST",
     "sortNum": 0,
     "created": "2022-07-14T20:37:14.344Z",
-    "modified": "2022-07-17T20:40:49.144Z",
-    "headers": [],
+    "modified": "2022-07-17T20:44:26.122Z",
+    "headers": [
+      {
+        "name": "name",
+        "value": "teste"
+      }
+    ],
     "params": [],
     "body": {
       "type": "json",
