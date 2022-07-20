@@ -4,11 +4,11 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/",
-    "url": "http://localhost:3000/",
+    "url": "http://localhost:3000/products",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-07-14T20:18:22.123Z",
-    "modified": "2022-07-14T20:18:22.176Z",
+    "modified": "2022-07-20T05:05:01.463Z",
     "headers": [],
     "params": [],
     "tests": []
@@ -18,17 +18,12 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products/1",
+    "url": "http://localhost:3000/products",
     "method": "GET",
     "sortNum": 0,
     "created": "2022-07-14T20:19:19.708Z",
-    "modified": "2022-07-14T20:25:38.321Z",
-    "headers": [
-      {
-        "name": "id",
-        "value": "1"
-      }
-    ],
+    "modified": "2022-07-20T12:04:57.121Z",
+    "headers": [],
     "params": [],
     "tests": []
   },
@@ -37,23 +32,13 @@
     "colId": "history",
     "containerId": "",
     "name": "http://localhost:3000/products",
-    "url": "http://localhost:3000/products",
-    "method": "POST",
+    "url": "http://localhost:3000/",
+    "method": "GET",
     "sortNum": 0,
     "created": "2022-07-14T20:37:14.344Z",
-    "modified": "2022-07-17T20:44:26.122Z",
-    "headers": [
-      {
-        "name": "name",
-        "value": "teste"
-      }
-    ],
+    "modified": "2022-07-18T18:17:55.250Z",
+    "headers": [],
     "params": [],
-    "body": {
-      "type": "json",
-      "raw": "{\n    \"name\": \"Teste\"\n}",
-      "form": []
-    },
     "tests": []
   }
 ]
