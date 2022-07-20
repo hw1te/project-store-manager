@@ -19,9 +19,8 @@ const productsService = {
 
   create: async (name) => {
     const validation = validate(name);
-    console.log(validation.data.message);
 
-    if (validation.data.message) {
+    if (validation !== true) {
       return validation;
     }
 

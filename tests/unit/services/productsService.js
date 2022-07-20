@@ -20,7 +20,7 @@ describe('Testa a camada service e suas funcionalidades', () => {
 
   it('Retorna uma lista de produtos', async () => {
     const response = await productsService.getAll();
-
+    console.log(response);
     expect(response).to.be.deep.equal(productsList);
   });
 
