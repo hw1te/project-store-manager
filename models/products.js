@@ -26,6 +26,13 @@ const productsModel = {
     const data = await connection.query(query, [name, id]);
     return data;
   },
+
+  delete: async (id) => {
+    const query = 'DELETE FROM StoreManager.products WHERE id = ?';
+
+    const data = await connection.query(query, [id]);
+    return data;
+  },
 };
 
 module.exports = productsModel; 
