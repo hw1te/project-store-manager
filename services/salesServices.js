@@ -29,13 +29,22 @@ const salesService = {
   },
 
   getById: async (id) => {
-    console.log('linha 33');
     const data = await salesModel.getById(id);
     if (!data.length) {
       return { code: 404, data: { message: 'Sale not found' } };
     }
 
     return { code: 200, data };
+  },
+
+  delete: async (id) => {
+    const data = await salesModel.getById(id);
+    if (!data.length) {
+      return { code: 404, data: { message: 'Sale not found' } };
+    }
+    await salesModel.delete(id);
+
+    return { code: 204, data: '' };
   },
 };
 

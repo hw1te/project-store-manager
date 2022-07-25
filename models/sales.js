@@ -31,8 +31,14 @@ const salesModel = {
     FROM StoreManager.sales_products AS sp INNER JOIN StoreManager.sales AS s
     ON sp.sale_id = s.id WHERE s.id = ?`;
     const [sale] = await connection.query(query, [id]);
-    console.log(sale, 'linha 34');
+
     return sale;
+  },
+
+  delete: async (id) => {
+    const querySales = 'DELETE FROM StoreManager.sales WHERE id = ?';
+
+    await connection.query(querySales, [id]);
   },
 };
 

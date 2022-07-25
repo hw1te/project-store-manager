@@ -15,7 +15,13 @@ const salesController = {
 
   getById: async (req, res) => {
     const { code, data } = await salesServices.getById(req.params.id);
-    console.log(data);
+    return res.status(code).json(data);
+  },
+
+  delete: async (req, res) => {
+    const { id } = req.params;
+    const { code, data } = await salesServices.delete(id);
+
     return res.status(code).json(data);
   },
 };
