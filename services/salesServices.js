@@ -21,6 +21,22 @@ const salesService = {
     const id = await salesModel.createSale(sales);
     return { code: 201, data: { id, itemsSold: sales } };
   },
+
+  getAll: async () => {
+    const data = await salesModel.getAll();
+
+    return data;
+  },
+
+  getById: async (id) => {
+    console.log('linha 33');
+    const data = await salesModel.getById(id);
+    if (!data.length) {
+      return { code: 404, data: { message: 'Sale not found' } };
+    }
+
+    return { code: 200, data };
+  },
 };
 
 module.exports = salesService;
