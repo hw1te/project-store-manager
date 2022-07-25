@@ -47,3 +47,36 @@ describe('O resultado do metodo getAll', () => {
   })
 
 })
+
+describe('O resultado do metodo getById', () => {
+  const product = {
+    "id": 1,
+    "name": "Martelo do Thor",
+  }
+  before(() => {
+    sinon.stub(connection, 'query').resolves([[product]])
+  });
+
+  after(() => {
+    connection.query.restore();
+  })
+
+  it('retorna o produto pesquisado', async () => {
+    expect(await productsModel.getById(2)).to.be.deep.equal(product)
+  })
+})
+
+describe('O resultado do metodo create', () => {
+  const productId = { insertId: 2 }
+  before(() => {
+    sinon.stub(connection, 'query').resolves([productId])
+  });
+  after(() => {
+    connection.query.restore();
+  })
+
+  it('retorna id criado', async () => {
+    const response = await productsModel.create(2);
+    expect(response).to.be.deep.equal(productId.insertId)
+  })
+})
