@@ -28,6 +28,23 @@ const productsService = {
 
     return { code: 201, data: { id, name } };
   },
+
+  update: async (name, id) => {
+    const foundProduct = await productsModel.getById(id);
+
+    if (!foundProduct) {
+      return { code: 404, data: { message: 'Product not found' } };
+    }
+
+    const validation = validate(name);
+
+    if (validation !== true) {
+      return validation;
+    }
+    await productsModel.update(name, id);
+
+    return { code: 200, data: { id, name } };
+  },
 };
 
 module.exports = productsService;
