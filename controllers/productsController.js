@@ -34,6 +34,12 @@ const productsController = {
 
     return res.status(code).json(data);
   },
+
+  search: async (req, res) => {
+    const { q } = req.query;
+    const data = await productsService.search(q);
+    return res.json(data);
+  },
 };
 
 module.exports = productsController;

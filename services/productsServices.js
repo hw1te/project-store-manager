@@ -56,6 +56,15 @@ const productsService = {
 
     return { code: 204, data: '' };
   },
+
+  search: async (name) => {
+    const products = await productsModel.getAll();
+    if (name.length === 0) {
+      return products;
+    }
+    const data = products.filter((product) => product.name.includes(name));
+    return data;
+  },
 };
 
 module.exports = productsService;
