@@ -40,6 +40,18 @@ const salesModel = {
 
     await connection.query(querySales, [id]);
   },
+
+  update: async (id, sales) => {
+    await connection.query('DELETE FROM StoreManager.sales_products WHERE sale_id = ?', [id]);
+    await Promise.all(
+      sales.map(async (sale) => {
+        const updateQuery = `
+          INSERT INTO StoreManager.sales_products (product_id, sale_id, quantity) VALUES (?, ?, ?)
+        `;
+        await connection.query(updateQuery, [sale.productId, id, sale.quantity]);
+      }),
+    );
+  },
 };
 
 module.exports = salesModel;

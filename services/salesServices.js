@@ -46,6 +46,25 @@ const salesService = {
 
     return { code: 204, data: '' };
   },
+
+  update: async (id, sales) => {
+    const findSalesId = await salesModel.getById(id);
+    const validation = sales.map((sale) => validate(sale.productId, sale.quantity));
+    const isError = validation.find((error) => error);
+    if (isError) {
+      return isError;
+    }
+    if (findSalesId.length === 0) {
+      return { code: 404, data: { message: 'Sale not found' } };
+    }
+    const mapId = sales.map((sale) => findSalesId.some((findSale) =>
+      sale.productId === findSale.productId));
+    if (mapId.includes(false)) {
+      return { code: 404, data: { message: 'Product not found' } };
+    }
+    await salesModel.update(id, sales);
+    return { code: 200, data: { saleId: id, itemsUpdated: sales } };
+  },
 };
 
 module.exports = salesService;
