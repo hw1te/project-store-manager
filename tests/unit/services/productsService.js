@@ -48,7 +48,7 @@ describe('Testa o funcionamento de getById com sucesso', () => {
     }
     expect(await productsService.getById(1)).to.be.deep.equal(response)
   })
-})
+});
 
 describe('Testa funcionamento de getById quando falha', () => {
 
@@ -58,7 +58,6 @@ describe('Testa funcionamento de getById quando falha', () => {
       message: 'Product not found'
     }
   }
-  // console.log(errorMessage)
   before(() => {
     sinon.stub(productsModel, 'getById').resolves();
   })
@@ -72,22 +71,70 @@ describe('Testa funcionamento de getById quando falha', () => {
   })
 })
 
-describe('Testa funcionamento de create', () => {
-  const productTest = {
-    code: 201,
-    data: { id: 1, name: 'Brinquedo' },
-  };
-
+describe('Testa o metodo create da camada service de products', () => {
   before(() => {
-    sinon.stub(productsModel, 'create').resolves(productTest)
+    sinon.stub(productsModel, 'create').resolves(2)
   })
 
   after(() => {
-    productsModel.create.restore();
+    productsModel.create.restore()
   })
-  it('Caso o produto seja inserido com sucesso', async () => {
-    const response = await productsModel.create(productTest.data.name);
+  it('Caso crie com sucesso', async () => {
+    const response = {
+      code: 201,
+      data: {
+        id: 2,
+        name: 'Brinquedo Teste'
+      }
+    }
+    const data = await productsModel.create(response);
+    expect(response).to.be.instanceOf(Object)
+  })
+  it('Caso não encontre o produto', async () => {
 
-    expect(response).to.be.equal(productTest)
+  })
+})
+
+describe('Testa o metodo remove na camada service de products', () => {
+  const product = {
+    id: 1,
+    name: 'Martelo de Thor',
+  }
+  const response = {
+    code: 204,
+    data: ''
+  }
+  before(() => {
+    sinon.stub(productsModel, 'getById').resolves(product)
+    sinon.stub(productsModel, 'delete').resolves(null)
+  })
+  after(() => {
+    productsModel.getById.restore();
+    productsModel.delete.restore();
+  })
+  it('Quando funciona com sucesso', async () => {
+    const data = await productsService.delete(1)
+    expect(data).to.be.deep.equal(response)
+  })
+
+})
+
+describe(`Retorna um erro caso o metodo de errado`, () => {
+  before(() => {
+    sinon.stub(productsModel, 'getById').resolves(null)
+  })
+  after(() => {
+    productsModel.getById.restore();
+  })
+
+  it('retorna um response de erro caso o Model não encontre o produto', async () => {
+    const result = {
+      code: 404,
+      data: {
+        message: 'Product not found'
+      }
+    }
+    const response = await productsService.getById();
+    expect(response.data.message).to.be.deep.equal(result.data.message)
   })
 })
