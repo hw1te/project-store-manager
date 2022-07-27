@@ -24,7 +24,7 @@ const salesService = {
 
   getAll: async () => {
     const data = await salesModel.getAll();
-
+    console.log(data);
     return data;
   },
 
