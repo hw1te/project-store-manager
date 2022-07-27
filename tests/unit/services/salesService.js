@@ -1,7 +1,5 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const productsModel = require('../../../models/products');
-const productsService = require('../../../services/productsServices');
 const salesModel = require('../../../models/sales');
 const salesService = require('../../../services/salesServices');
 
@@ -37,17 +35,23 @@ describe('Testa metodo createSale', () => {
 const sales = [
   {
     "saleId": 1,
-    "date": "2021-09-09T04:54:29.000Z",
+    "date": "2022-07-18T17:27:42.000Z",
     "productId": 1,
-    "quantity": 2
+    "quantity": 5
   },
   {
     "saleId": 1,
-    "date": "2021-09-09T04:54:54.000Z",
+    "date": "2022-07-18T17:27:42.000Z",
     "productId": 2,
-    "quantity": 2
+    "quantity": 10
   },
-]
+  {
+    "saleId": 2,
+    "date": "2022-07-18T17:27:42.000Z",
+    "productId": 3,
+    "quantity": 15
+  }
+];
 
 describe('O metodo getAll da camda service de sales', () => {
   before(() => {
@@ -68,24 +72,23 @@ describe('O metodo getAll da camda service de sales', () => {
   })
 })
 
-describe('Testa o metodo getById em service sales', () => {
+describe('Retorna venda usando id', () => {
   before(() => {
-    sinon.stub(salesService, 'getById').resolves(sales[1]);
+    sinon.stub(salesModel, 'getById').resolves(sales[2]);
   });
-
   after(() => {
-    salesService.getById.restore();
+    salesModel.getById.restore();
   });
 
-  it('Retorno é um objeto', async () => {
-    const response = await salesService.getById(1);
-    expect(response).to.be.instanceOf(Object);
+  it('O retorno é um objeto', async () => {
+    const response = await salesService.getById(3);
+    expect(response).to.be.an('object');
   });
 
-  it('Retorna item pelo id', async () => {
-    const response = await salesService.getById(1);
-
-    expect(response).to.deep.equal(sales[1]);
+  it('O retorno tem o id buscado', async () => {
+    const response = await salesModel.getById(2);
+    expect(response).to.deep.equal(sales[2]);
   });
 
 });
+

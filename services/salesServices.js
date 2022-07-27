@@ -24,7 +24,6 @@ const salesService = {
 
   getAll: async () => {
     const data = await salesModel.getAll();
-    console.log(data);
     return data;
   },
 
@@ -33,7 +32,6 @@ const salesService = {
     if (!data.length) {
       return { code: 404, data: { message: 'Sale not found' } };
     }
-
     return { code: 200, data };
   },
 
