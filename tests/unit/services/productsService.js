@@ -95,7 +95,9 @@ describe('Testa o metodo create da camada service de products', () => {
   })
 })
 
-describe('Testa o metodo remove na camada service de products', () => {
+
+
+describe('Testa o metodo delete na camada service de products', () => {
   const product = {
     id: 1,
     name: 'Martelo de Thor',

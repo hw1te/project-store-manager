@@ -24,7 +24,7 @@ const sales = [
   }
 ];
 
-describe('Testa metodo getAll', () => {
+describe('Testa salesController getAll', () => {
   const req = {};
   const res = {};
 
@@ -49,4 +49,36 @@ describe('Testa metodo getAll', () => {
 
     expect(res.status.calledWith(200)).to.be.equal(true);
   });
-}); 
+})
+
+describe('Testa salesController getById', () => {
+  const req = {};
+  const res = {};
+
+  before(() => {
+    res.status = sinon.stub().returns(res);
+    req.params = { id: 2 }
+    res.json = sinon.stub().returns([sales]);
+    sinon.stub(salesService, 'getById').resolves([sales[2]]);
+  });
+  after(() => {
+    salesService.getById.restore();
+  });
+
+  it('Espera que o json seja um objeto', async () => {
+    await salesController.getById(req, res);
+    console.log(sales[2])
+    expect(res.json.calledWith(sales[2]));
+  });
+
+  it('Retorna status OK', async () => {
+
+    await salesController.getById(req, res);
+
+    expect(res.status.calledWith(200))
+  });
+});
+
+
+
+

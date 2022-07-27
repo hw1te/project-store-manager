@@ -36,4 +36,31 @@ describe('Demonstra todos os produtos na camada controller', () => {
   });
 })
 
+describe('Demonstra produtos pelo id na busca', () => {
+  const res = {};
+  const req = {};
+
+  before(() => {
+    res.status = sinon.stub().returns(res);
+    req.params = { id: 2 }
+    res.json = sinon.stub().returns(productsList[2]);
+    sinon.stub(productsService, 'getById').resolves(productsList[2]);
+  });
+
+  after(() => {
+    productsService.getById.restore();
+  });
+
+  it('O retorno é um array de objetos', async () => {
+    const data = await productsController.getById(req, res);
+    expect(data).to.be.an('object');
+  });
+
+  it('O retorno tem o status 200', async () => {
+    await productsController.getById(req, res);
+
+    expect(res.status.calledWith(200))
+  });
+})
+
 

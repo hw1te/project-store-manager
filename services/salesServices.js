@@ -32,6 +32,7 @@ const salesService = {
     if (!data.length) {
       return { code: 404, data: { message: 'Sale not found' } };
     }
+    console.log(data);
     return { code: 200, data };
   },
 
